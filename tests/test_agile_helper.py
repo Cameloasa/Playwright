@@ -33,3 +33,77 @@ def test_view_daily_standup(page: Page):
 
     heading = page.get_by_role("heading").get_by_text( re.compile("Daily standup") )
     expect(heading).to_be_visible(timeout=100)
+
+def test_view_sprint_planning(page: Page):
+    """User story:
+       [U2] Som en användare, vill jag kunna se Sprint planning
+
+       Acceptanskriterier:
+       [A1.1] Det går att klicka på knappen "First"
+       [A1.2] Det går att hitta knappen "Sprint Planning"
+       [A1.3] Det går att klicka på knappen "Sprint Planning"
+       [A1.4] Rubriken "Sprint Planning" ska vara synlig på webbsidan.
+
+       Scenario:
+       1. Klicka på knappen "First"
+       2. Hitta button med texten "Sprint planning"
+       3. klicka på knappen "Sprint planning"
+       4. kontrollera att man ser en rubrik med texten "Sprint planning"
+       """
+    """Testa att det går att se Sprint planning"""
+    page.goto("https://lejonmanen.github.io/agile-helper/")
+    expect(page).to_have_title(re.compile("Agile helper"), timeout=2000)
+
+    # Klicka på button "First"
+    locator = page.get_by_role("button")
+    first_button = locator.get_by_text("First")
+    first_button.click(timeout=100)
+
+    # Hitta button med texten "Sprint planning"
+    sp_button = page.get_by_role("button").get_by_text(re.compile("Sprint planning"))
+    expect(sp_button).to_be_visible()
+
+    # Klicka på den
+    sp_button.click(timeout=100)
+
+    # Finns rubriken "Sprint planning"?
+    sp_heading = page.get_by_role("heading").get_by_text("Sprint planning")
+    expect(sp_heading).to_be_visible()
+
+def test_view_sprint_retrospective(page: Page):
+    """User story:
+        [U3] Som en användare, vill jag kunna se Sprint retrospective
+
+        Acceptanskriterier:
+        [A1.1] Det går att klicka på knappen "Last"
+        [A1.2] Det går att hitta knappen "Sprint retrospective"
+        [A1.3] Det går att klicka på knappen "Sprint retrospective"
+        [A1.4] Rubriken "Sprint retrospective" ska vara synlig på webbsidan.
+
+        Scenario:
+        1. Klicka på knappen "Last"
+        2. Hitta knappen med texten "Sprint retrospective"
+        3. Klicka på knappen vars text innehåller "sprint retrospective"
+        4. kontrollera att man ser en rubrik med texten "Sprint retrospective"
+    """
+    page.goto("https://lejonmanen.github.io/agile-helper/")
+    expect(page).to_have_title(re.compile("Agile helper"), timeout=2000)
+
+    # Klicka på knappen "Last"
+    locator = page.get_by_role("button")
+    last_button = locator.get_by_text("Last")
+    last_button.click(timeout=100)
+
+    # Hitta knappen med texten "Sprint retrospective"
+    retrospective_button = page.get_by_role("button").get_by_text(re.compile("Sprint retrospective"))
+    expect(retrospective_button).to_be_visible()
+
+    # klicka på knappen vars text innehåller "sprint retrospective"
+    retrospective_button.click(timeout=100)
+
+    # kontrollera att man ser en rubrik med texten "Sprint review"
+    retrospective_heading = page.get_by_role("heading").get_by_text("Sprint retrospective")
+    expect(retrospective_heading).to_be_visible()
+
+
+
