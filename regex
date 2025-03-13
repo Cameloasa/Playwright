@@ -1,0 +1,181 @@
+1a Vilka strängar matchas av det reguljära uttrycket: "ab" ? Testa era svar på https://regex101.com/
+A.	"a b"
+B.	"aBBa"
+C.	"sabotör" - "ab"
+
+1b Betrakta uttrycket "nisse". Vad skriver jag för att matcha både "Nisse", "NISSE" och "nisse"?
+Case insensitive
+
+1c Vilka strängar matchas av "a*n" ?
+a – matches a character
+n – matches n character
+*quantifier – match = or more of preceding token
+A.	"an" - an
+B.	"amerikan" - an
+C.	"naturlig" - n
+D.	"annandag" - annan
+
+1d Vilka strängar matchas av "[ae]n" ?
+A.	"naiv"
+B.	"inconsequential" -en
+C.	"bae"
+[] character set- match any character in the set
+
+1e Vilka strängar matchas av "je.+e"?
+A.	"je"
+B.	"jee"
+C.	"jeppe" - jeppe
+D.	"je je" - je je
+. Dot - Matches any character except linebreaks. Equivalent to [^\n\r].
++ - Matches 1 or more of the preceding token.
+
+1f Vilka strängar matchas av "\san?\s"
+A.	"sansad"
+B.	" annan "
+C.	"    an   na   an   " - an    an
+D.	"be a darling" - a
+\s - Matches any whitespace character (spaces, tabs, line breaks).
+? quantifier - Matches 0 or 1 of the preceding token, effectively making it optional.
+
+1e Skriv ner med egna ord, vad följande uttryck matchar. "Strängar som innehåller…"
+A.	"lines?"
+B.	"^a*ö$"
+C.	"[aeiouyåäö]+"
+D.	"[123456789]\d*"
+E.	"\d{4}-\d{2}-\d{2}
+
+•  lines?
+•	Strängar som innehåller "line" eller "lines".
+•	s? betyder att bokstaven "s" är valfri (kan förekomma 0 eller 1 gång).
+•	Exempel på matchningar: "line", "lines", "this is a line", "multiple lines"
+•  ^a*ö$
+•	Strängar som börjar med 0 eller fler "a" och slutar med "ö".
+•	^ markerar början av strängen, $ markerar slutet.
+•	a* betyder att bokstaven "a" kan förekomma 0, 1 eller flera gånger.
+•	Exempel på matchningar: "ö", "aö", "aaaaö", "aaaaaaaaaaaaaaö"
+•	Exempel som inte matchar: "bö", "ao" (eftersom den inte slutar på "ö").
+•  [aeiouyåäö]+
+•	Strängar som innehåller en eller flera vokaler (inklusive svenska vokaler).
+•	+ betyder minst en av tecknena i hakparentesen [ ].
+•	Exempel på matchningar: "a", "io", "äöå", "eioau"
+•	Exempel som inte matchar: "bcdfgh" (eftersom det saknar vokaler).
+•  [123456789]\d*
+•	Strängar som börjar med en siffra 1-9 och kan följas av fler siffror.
+•	\d betyder valfri siffra (0-9), och * betyder 0 eller fler upprepningar.
+•	Exempel på matchningar: "1", "23", "456", "98765".
+•	Exempel som inte matchar: "0" (eftersom den börjar med 0), "abc" (inte siffror).
+•  \d{4}-\d{2}-\d{2}
+•	Strängar som följer datumformatet ÅÅÅÅ-MM-DD.
+•	\d{4} → exakt fyra siffror (år)
+•	\d{2} → exakt två siffror (månad och dag)
+•	- är ett fast tecken som måste finnas mellan siffrorna
+•	Exempel på matchningar: "2024-03-11", "1999-12-31"
+•	Exempel som inte matchar: "24-03-11" (för kort år), "2024-3-11" (månad/dag måste vara två siffror), "11-03-2024" (fel ordning).
+
+
+1a. Matcha en längd i cm
+
+Regex: \d+\s*cm
+
+•	\d+ → En eller flera siffror (t.ex. "55")
+•	\s* → Eventuella mellanslag
+•	cm → Måttenheten
+Exempel på matchningar:
+✅ "55 cm"
+✅ "120cm"
+❌ "1.5 m" (matchar bara cm)
+________________________________________
+1b. Matcha två längder i texten
+
+Regex: \d+\s*cm.*\d+\s*cm
+
+Matchar en längd i cm, något annat textinnehåll och sedan en till längd i cm.
+Exempel på matchningar:
+✅ "Fiskarna var 55 cm och 70 cm långa."
+❌ "Fiskarna var 55 cm långa." (bara en längd)
+________________________________________
+1c. Kontrollera att längderna har samma enhet
+
+Regex: \d+\s*(cm|m).*\d+\s*\1
+
+•	\d+\s*(cm|m) → Fångar en längd med antingen "cm" eller "m", sparar enheten.
+•	.* → Tillåter valfri text mellan längderna.
+•	\d+\s*\1 → Letar efter en annan längd med samma enhet (\1 = tidigare matchad enhet).
+Exempel på matchningar:
+✅ "55 cm och 70 cm"
+✅ "1,2 m och 3,5 m"
+❌ "55 cm och 1,2 m" (olika enheter)
+________________________________________
+2. Svenskt postnummer (ex: "123 45")
+
+Regex: \d{3}\s\d{2}
+
+•	\d{3} → Tre siffror
+•	\s → Mellanslag
+•	\d{2} → Två siffror
+Exempel på matchningar:
+✅ "123 45"
+❌ "12345" (saknar mellanslag)
+________________________________________
+3. Datum enligt ISO 8601 (ex: "2025-03-10")
+
+Regex: \d{4}-\d{2}-\d{2}
+
+•	\d{4} → Fyra siffror (år)
+•	- → Bindestreck
+•	\d{2} → Två siffror (månad och dag)
+Exempel på matchningar:
+✅ "2025-03-10"
+❌ "25-03-10" (för kort år)
+________________________________________
+4. Pengavärde i siffror (ex: "200 kr", "12,50 kr", "0,35 kr")
+
+Regex: \d+(,\d{2})?\s*kr
+
+•	\d+ → Heltal
+•	(,\d{2})? → Valfri decimal med två siffror
+•	\s* → Valfria mellanslag
+•	kr → Svenska kronor
+Exempel på matchningar:
+✅ "200 kr"
+✅ "12,50kr"
+✅ "0,35 kr"
+❌ "12.50 kr" (använder punkt istället för komma)
+________________________________________
+5a. Enkel e-postvalidering
+
+Regex: [a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]+
+
+
+•	[a-zA-Z0-9._-]+ → Användarnamn med bokstäver, siffror, punkt, bindestreck
+•	@ → Måste finnas
+•	[a-zA-Z0-9.-]+ → Serverdel med bokstäver, siffror, punkt, bindestreck
+•	\. → Punkt för domändelen
+•	[a-zA-Z0-9]+ → Slutar med bokstäver eller siffror
+
+Regex: [\w.-]+@[\w.-]+\.\w+
+•	[\w.-]+ → Set Användarnamn med bokstäver, siffror, punkt, bindestreck
+•	@ → Måste finnas
+•	[\w.-]+ → Set Serverdel med bokstäver, siffror, punkt, bindestreck
+•	\. → Punkt för domändelen
+•	\w+ → Slutar med bokstäver eller siffror
+
+Exempel på matchningar:
+✅ "test.email@domain.com"
+✅ "user-name@server123.net"
+❌ "@domain.com" (saknar användarnamn)
+________________________________________
+5b. Komplett e-postvalidering (RFC 5322)
+
+Regex: ^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+
+•	Mer strikt regex som:
+o	Förbjuder dubbla punkter (..)
+o	Kräver giltiga toppdomäner (minst 2 bokstäver)
+Exempel på matchningar:
+✅ "valid.email@example.com"
+✅ "name+alias@domain.co.uk"
+❌ "user@.com" (saknar domännamn)
+❌ "user@domain..com" (dubbelpunkt)
+
+
