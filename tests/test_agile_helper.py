@@ -1,11 +1,13 @@
 import re
+from asyncio import timeout
+
 from playwright.sync_api import Page, expect
 
 def test_has_title(page: Page):
     page.goto("https://lejonmanen.github.io/agile-helper/")
 
     # Expect a title "to contain" a substring.
-    expect(page).to_have_title(re.compile("Agile helper"))
+    expect(page).to_have_title(re.compile("Agile helper"), timeout= 2000)
 
 def test_view_daily_standup(page: Page):
     """User story:
@@ -22,6 +24,7 @@ def test_view_daily_standup(page: Page):
     3. kontrollera att man ser en rubrik med texten "Daily standup"
     """
     page.goto("https://lejonmanen.github.io/agile-helper/")
+    expect(page).to_have_title(re.compile("Agile helper"), timeout=2000)
 
     button_locator = page.get_by_role("button")
     middle_button = button_locator.get_by_text( re.compile("Somewhere in the middle") )
@@ -49,6 +52,14 @@ def test_view_sprint_planning(page: Page):
        2. Hitta button med texten "Sprint planning"
        3. klicka på knappen "Sprint planning"
        4. kontrollera att man ser en rubrik med texten "Sprint planning"
+
+        Testscenario în Punktlista:
+        1. Navigera till sidan https://lejonmanen.github.io/agile-helper/.
+        2. Kontrollera att sidan har rätt titel "Agile helper" (implicit testning av sidans laddning).
+        3. Hitta knappen "First" och kontrollera att den är synlig.
+        4. Klicka på "First" och verifiera att knappen "Sprint Planning" blir synlig.
+        5. Hitta knappen "Sprint Planning" och klicka på den.
+        6. Kontrollera att rubriken "Sprint Planning" syns på sidan.
        """
     """Testa att det går att se Sprint planning"""
     page.goto("https://lejonmanen.github.io/agile-helper/")
