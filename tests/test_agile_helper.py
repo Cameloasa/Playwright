@@ -116,5 +116,40 @@ def test_view_sprint_retrospective(page: Page):
     retrospective_heading = page.get_by_role("heading").get_by_text("Sprint retrospective")
     expect(retrospective_heading).to_be_visible()
 
+def test_sprint_planning_start(page: Page):
+    """User Story:
+        [U4]Som en användare, vill jag kunna förstå stegen i sprint planning genom
+        att läsa listan och se mer information genom att hovra över varje punkt,
+        samt avsluta genom att starta sprinten.
+
+        Scenario:
+        1. Navigera till webbsidan: https://lejonmanen.github.io/agile-helper/
+        2. Klicka på knappen "First".
+        3. Klicka på knappen "Sprint planning".
+        4. Klicka på knappen "Ok, we are done. Start the sprint.".
+        5. Kontrollera att dialogrutan stängs.
+    """
+    """Testar detaljerad interaktion inom Sprint Planning-dialogen"""
+
+    # Steg 1: Navigera till sidan
+    page.goto("https://lejonmanen.github.io/agile-helper/")
+    expect(page).to_have_title(re.compile("Agile helper"), timeout=2000)
+
+    # Steg 2: Klicka på "First"
+    first_button = page.get_by_role("button", name="First")
+    first_button.click(timeout= 100)
+
+    # Steg 3: Klicka på "Sprint planning"
+    sprint_planning_button = page.get_by_role("button").get_by_text(re.compile("Sprint planning"))
+    sprint_planning_button.click(timeout= 100)
+
+    # Steg 4: Klicka på "Ok, we are done. Start the sprint."
+    start_sprint_button = page.get_by_role("button", name=re.compile("Start the sprint"))
+    start_sprint_button.click(timeout= 100)
+
+    # Steg 5: Kontrollera att dialogrutan är stängd
+    dialog = page.locator("dialog")
+    expect(dialog).not_to_be_visible()
+
 
 
