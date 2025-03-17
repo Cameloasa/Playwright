@@ -85,6 +85,7 @@ def test_view_sprint_planning(page: Page):
 def test_view_sprint_retrospective(page: Page):
     """User story:
         [U3] Som en användare, vill jag kunna se Sprint retrospective
+         för att förstå hur teamet reflekterar över sprinten och identifierar förbättringsområden.
 
         Acceptanskriterier:
         [A3.1] Det går att klicka på knappen "Last"
