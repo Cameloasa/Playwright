@@ -44,27 +44,27 @@ C.	"[aeiouyåäö]+"
 D.	"[123456789]\d*"
 E.	"\d{4}-\d{2}-\d{2}
 
-•  lines?
+•  Regex : lines?
 •	Strängar som innehåller "line" eller "lines".
 •	s? betyder att bokstaven "s" är valfri (kan förekomma 0 eller 1 gång).
 •	Exempel på matchningar: "line", "lines", "this is a line", "multiple lines"
-•  ^a*ö$
+•  Regex : ^a*ö$
 •	Strängar som börjar med 0 eller fler "a" och slutar med "ö".
 •	^ markerar början av strängen, $ markerar slutet.
 •	a* betyder att bokstaven "a" kan förekomma 0, 1 eller flera gånger.
 •	Exempel på matchningar: "ö", "aö", "aaaaö", "aaaaaaaaaaaaaaö"
 •	Exempel som inte matchar: "bö", "ao" (eftersom den inte slutar på "ö").
-•  [aeiouyåäö]+
+•  Regex : [aeiouyåäö]+
 •	Strängar som innehåller en eller flera vokaler (inklusive svenska vokaler).
 •	+ betyder minst en av tecknena i hakparentesen [ ].
 •	Exempel på matchningar: "a", "io", "äöå", "eioau"
 •	Exempel som inte matchar: "bcdfgh" (eftersom det saknar vokaler).
-•  [123456789]\d*
+•  Regex : [123456789]\d*
 •	Strängar som börjar med en siffra 1-9 och kan följas av fler siffror.
 •	\d betyder valfri siffra (0-9), och * betyder 0 eller fler upprepningar.
 •	Exempel på matchningar: "1", "23", "456", "98765".
 •	Exempel som inte matchar: "0" (eftersom den börjar med 0), "abc" (inte siffror).
-•  \d{4}-\d{2}-\d{2}
+•  Regex : \d{4}-\d{2}-\d{2}
 •	Strängar som följer datumformatet ÅÅÅÅ-MM-DD.
 •	\d{4} → exakt fyra siffror (år)
 •	\d{2} → exakt två siffror (månad och dag)
