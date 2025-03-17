@@ -40,12 +40,13 @@ def test_view_daily_standup(page: Page):
 def test_view_sprint_planning(page: Page):
     """User story:
        [U2] Som en användare, vill jag kunna se Sprint planning
+       för att förstå hur planeringen av en sprint går till och vilka steg som ingår.
 
        Acceptanskriterier:
-       [A1.1] Det går att klicka på knappen "First"
-       [A1.2] Det går att hitta knappen "Sprint Planning"
-       [A1.3] Det går att klicka på knappen "Sprint Planning"
-       [A1.4] Rubriken "Sprint Planning" ska vara synlig på webbsidan.
+       [A2.1] Det går att klicka på knappen "First"
+       [A2.2] Det går att hitta knappen "Sprint Planning"
+       [A2.3] Det går att klicka på knappen "Sprint Planning"
+       [A2.4] Rubriken "Sprint Planning" ska vara synlig på webbsidan.
 
        Scenario:
        1. Klicka på knappen "First"
@@ -86,10 +87,10 @@ def test_view_sprint_retrospective(page: Page):
         [U3] Som en användare, vill jag kunna se Sprint retrospective
 
         Acceptanskriterier:
-        [A1.1] Det går att klicka på knappen "Last"
-        [A1.2] Det går att hitta knappen "Sprint retrospective"
-        [A1.3] Det går att klicka på knappen "Sprint retrospective"
-        [A1.4] Rubriken "Sprint retrospective" ska vara synlig på webbsidan.
+        [A3.1] Det går att klicka på knappen "Last"
+        [A3.2] Det går att hitta knappen "Sprint retrospective"
+        [A3.3] Det går att klicka på knappen "Sprint retrospective"
+        [A3.4] Rubriken "Sprint retrospective" ska vara synlig på webbsidan.
 
         Scenario:
         1. Klicka på knappen "Last"
